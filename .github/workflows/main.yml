@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-    - name: Setup JDK
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: '17'
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
 
-    - name: Grant execute permission
-      run: chmod +x gradlew
+      - name: Give permission to gradlew
+        run: chmod +x ./gradlew
 
-    - name: Build APK
-      run: ./gradlew assembleDebug
+      - name: Build APK
+        run: ./gradlew assembleDebug
 
-    - name: Upload APK
-      uses: - uses: actions/upload-artifact@v4
-
-      with:
-        name: beduproject-apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: beduproject-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
